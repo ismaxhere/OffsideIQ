@@ -1,75 +1,76 @@
-# ⚽ Offside IQ
+# ⚽ OffsideIQ
 
-> Football analytics and match insight platform. Track matches, analyze team performance, and generate rule-based insights.
+**OffsideIQ** is a full-stack football analytics platform to track matches, analyze performance, and generate intelligent insights.
+
+> Track. Analyze. Predict.
 
 ---
 
-## Architecture
+## 🚀 Features
+
+* 👤 Authentication (JWT-based)
+* 🛡️ Team management
+* ⚽ Match tracking & results
+* 📊 Advanced stats (possession, shots, xG)
+* ⭐ Player ratings & notes
+* 🧠 Rule-based insight engine
+* 📈 Dashboard with analytics
+
+---
+
+## 🧱 Architecture
 
 ```
 OffsideIQ/
 ├── src/
-│   ├── OffsideIQ.Core/           # Entities, Interfaces, DTOs, Enums
-│   ├── OffsideIQ.Infrastructure/ # EF Core DbContext + Repositories
-│   ├── OffsideIQ.Application/    # Business logic services + Insight engine
-│   └── OffsideIQ.API/            # ASP.NET Core Controllers, Middleware
+│   ├── OffsideIQ.Core
+│   ├── OffsideIQ.Infrastructure
+│   ├── OffsideIQ.Application
+│   └── OffsideIQ.API
+├── frontend/
 ├── docs/
-│   └── schema.sql                # PostgreSQL schema reference
-├── frontend/                     # React frontend (Vite)
 ├── docker-compose.yml
-├── Dockerfile
 └── OffsideIQ.sln
 ```
 
 ---
 
-## Prerequisites
+## ⚙️ Tech Stack
 
-| Tool | Version |
-|------|---------|
-| .NET SDK | 8.0+ |
-| PostgreSQL | 14+ |
-| Node.js | 18+ |
-| Docker (optional) | 24+ |
+| Layer     | Tech                  |
+| --------- | --------------------- |
+| Backend   | ASP.NET Core (.NET 8) |
+| ORM       | Entity Framework Core |
+| Database  | PostgreSQL            |
+| Frontend  | React + Vite          |
+| Auth      | JWT                   |
+| Container | Docker                |
 
 ---
 
-## Quick Start (Local)
+## 🛠️ Getting Started
 
-### 1. Clone and configure
-
-```bash
-git clone https://github.com/yourorg/offsideiq
-cd offsideiq
-```
-
-Edit `src/OffsideIQ.API/appsettings.json`:
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Port=5432;Database=offsideiq;Username=postgres;Password=yourpassword"
-  },
-  "Jwt": {
-    "Secret": "YOUR_SUPER_SECRET_KEY_MINIMUM_32_CHARACTERS_LONG",
-    "Issuer": "OffsideIQ",
-    "Audience": "OffsideIQ"
-  }
-}
-```
-
-### 2. Run the API
+### Clone
 
 ```bash
-cd src/OffsideIQ.API
-dotnet restore
-dotnet ef database update          # Runs migrations automatically
-dotnet run
+git clone https://github.com/ismaxhere/OffsideIQ.git
+cd OffsideIQ
 ```
 
-API runs at: `http://localhost:5000`  
-Swagger UI: `http://localhost:5000/swagger`
+---
 
-### 3. Run the Frontend
+### Run Backend
+
+```bash
+dotnet run --project src/OffsideIQ.API
+```
+
+API → http://localhost:5000
+Swagger → http://localhost:5000/swagger
+
+---
+
+### Run Frontend
 
 ```bash
 cd frontend
@@ -77,129 +78,84 @@ npm install
 npm run dev
 ```
 
-Frontend runs at: `http://localhost:5173`
+Frontend → http://localhost:5173 (default Vite dev server; may vary if the port is already in use)
 
 ---
 
-## Quick Start (Docker)
+## 🔑 Environment Variables
 
-```bash
-docker-compose up --build
-```
+### Backend
 
-- API: `http://localhost:5000`
-- PostgreSQL: `localhost:5432`
-
----
-
-## EF Core Migrations
-
-```bash
-# From solution root
-dotnet ef migrations add <MigrationName> --project src/OffsideIQ.Infrastructure --startup-project src/OffsideIQ.API
-dotnet ef database update --project src/OffsideIQ.Infrastructure --startup-project src/OffsideIQ.API
-```
-
----
-
-## API Endpoints
-
-### Auth
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register` | Register new user |
-| POST | `/api/auth/login` | Login, receive JWT |
-
-### Teams
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/teams` | List your teams |
-| GET | `/api/teams/{id}` | Get team by ID |
-| GET | `/api/teams/{id}/form` | Last 5 match form |
-| POST | `/api/teams` | Create team |
-| PUT | `/api/teams/{id}` | Update team |
-| DELETE | `/api/teams/{id}` | Delete team |
-
-### Matches
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/matches?page=1&pageSize=20` | Paginated match list |
-| GET | `/api/matches/recent` | Latest 10 matches |
-| GET | `/api/matches/{id}` | Match detail |
-| GET | `/api/matches/{id}/insights` | Rule-based match insights |
-| POST | `/api/matches` | Create match (with optional stats) |
-| PUT | `/api/matches/{id}` | Update match |
-| DELETE | `/api/matches/{id}` | Delete match |
-| PUT | `/api/matches/{id}/stats` | Upsert match stats |
-| GET | `/api/matches/{id}/notes` | Get match notes |
-| POST | `/api/matches/{id}/notes` | Add note |
-| DELETE | `/api/matches/{matchId}/notes/{noteId}` | Delete note |
-
-### Head-to-Head
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/h2h/{teamAId}/{teamBId}` | H2H record & stats |
-
-### Insights
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/insights` | Global insights |
-| GET | `/api/insights/teams/{teamId}` | Team-specific insights |
-| GET | `/api/insights/predict?homeTeamId=&awayTeamId=` | Match prediction |
-
-### Dashboard
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/dashboard` | Full dashboard payload |
-
-### Players
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/players/team/{teamId}` | Players by team |
-| GET | `/api/players/{id}` | Player detail |
-| POST | `/api/players` | Create player |
-| POST | `/api/players/matches/{matchId}/ratings` | Rate player in match |
-
----
-
-## Insight Engine
-
-The rule-based insight engine (`InsightService`) analyzes match data and generates contextual insights:
-
-| Type | Trigger | Example |
-|------|---------|---------|
-| `possession` | ≥65% possession | "Arsenal dominated possession at 68%" |
-| `scoring` | 0 or 5+ goals | "Goal fest — 6 goals in total" |
-| `streak` | 3+ consecutive wins | "On Fire 🔥 — 4-match winning streak" |
-| `form` | 4+ wins/losses in 5 | "Excellent form — 4W in last 5" |
-| `defense` | <0.5 or ≥2.5 avg conceded | "Solid backline — 0.4 goals/game" |
-| `discipline` | Red cards, 6+ yellows | "Feisty encounter — 7 yellow cards" |
-| `xg` | High xG, low goals | "Underperformed xG — 2.8 xG, 1 goal" |
-| `prediction` | Rule-based probability | "Home Win 58% — Away Win 28%" |
-
----
-
-## Environment Variables (Production)
-
-```env
-ConnectionStrings__DefaultConnection=Host=...;Database=offsideiq;...
-Jwt__Secret=<min 32 char random string>
+ConnectionStrings__DefaultConnection=Host=localhost;Port=5432;Database=offsideiq;Username=postgres;Password=yourpassword
+Jwt__Secret=your_super_secure_secret_key_here
 Jwt__Issuer=OffsideIQ
 Jwt__Audience=OffsideIQ
-ASPNETCORE_ENVIRONMENT=Production
-```
 
 ---
 
-## Tech Stack
+### Frontend
 
-| Layer | Technology |
-|-------|-----------|
-| API | ASP.NET Core 8, C# 12 |
-| ORM | Entity Framework Core 8 |
-| Database | PostgreSQL 16 |
-| Auth | JWT Bearer Tokens |
-| Passwords | BCrypt.Net |
-| Docs | Swashbuckle / Swagger UI |
-| Frontend | React 18 + Vite |
-| Container | Docker + Docker Compose |
+VITE_API_URL=http://localhost:5000 (default; change if your backend runs on a different port)
+
+---
+
+## 📡 API Overview
+
+### Auth
+
+* POST `/api/auth/register`
+* POST `/api/auth/login`
+
+### Teams
+
+* GET `/api/teams`
+* POST `/api/teams`
+
+### Matches
+
+* GET `/api/matches`
+* POST `/api/matches`
+
+*(Refer to Swagger UI for the complete API documentation.)*
+
+---
+
+## 🧠 Insight Engine
+
+Generates contextual match insights like:
+
+* 🔥 Winning streak detection
+* ⚽ Goal analysis
+* 📊 Possession dominance
+* 🎯 xG vs actual performance
+* 🧮 Match prediction
+
+---
+
+## 🌍 Deployment
+
+* ✅ Frontend → Vercel
+* ✅ Backend → Render
+* ✅ Database → Neon
+
+---
+
+## 📌 Future Improvements
+
+* Comprehensive player profiles with stats, history, and performance tracking
+* Real-time match updates with live data synchronization
+* Advanced analytics including heatmaps, passing networks, and trend insights
+* Social features for sharing matches, stats, and insights
+
+---
+
+## 🧑‍💻 Author
+
+**Ankon Naskar**
+GitHub: https://github.com/ismaxhere
+
+---
+
+## 📄 License
+
+MIT License
