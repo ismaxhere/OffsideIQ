@@ -1,0 +1,11 @@
+C:\Users\ANKAN NASKAR\Desktop\OffsideIQ\src\OffsideIQ.Core\bin\Debug\net8.0\OffsideIQ.Core.deps.json
+C:\Users\ANKAN NASKAR\Desktop\OffsideIQ\src\OffsideIQ.Core\bin\Debug\net8.0\OffsideIQ.Core.dll
+C:\Users\ANKAN NASKAR\Desktop\OffsideIQ\src\OffsideIQ.Core\bin\Debug\net8.0\OffsideIQ.Core.pdb
+C:\Users\ANKAN NASKAR\Desktop\OffsideIQ\src\OffsideIQ.Core\obj\Debug\net8.0\OffsideIQ.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ANKAN NASKAR\Desktop\OffsideIQ\src\OffsideIQ.Core\obj\Debug\net8.0\OffsideIQ.Core.AssemblyInfoInputs.cache
+C:\Users\ANKAN NASKAR\Desktop\OffsideIQ\src\OffsideIQ.Core\obj\Debug\net8.0\OffsideIQ.Core.AssemblyInfo.cs
+C:\Users\ANKAN NASKAR\Desktop\OffsideIQ\src\OffsideIQ.Core\obj\Debug\net8.0\OffsideIQ.Core.csproj.CoreCompileInputs.cache
+C:\Users\ANKAN NASKAR\Desktop\OffsideIQ\src\OffsideIQ.Core\obj\Debug\net8.0\OffsideIQ.Core.dll
+C:\Users\ANKAN NASKAR\Desktop\OffsideIQ\src\OffsideIQ.Core\obj\Debug\net8.0\refint\OffsideIQ.Core.dll
+C:\Users\ANKAN NASKAR\Desktop\OffsideIQ\src\OffsideIQ.Core\obj\Debug\net8.0\OffsideIQ.Core.pdb
+C:\Users\ANKAN NASKAR\Desktop\OffsideIQ\src\OffsideIQ.Core\obj\Debug\net8.0\ref\OffsideIQ.Core.dll
